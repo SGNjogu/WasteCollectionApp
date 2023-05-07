@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ttnm.Views.Dashboard.DashboardPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:ttnm.CustomControls"
+    xmlns:fontawesome="clr-namespace:ttnm.Resources.Fonts"
+    Title="Dashboard"
+    NavigationPage.HasNavigationBar="False">
+  <ScrollView>
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Image
+            Grid.Row="0"
+            Margin="0,20,0,0"
+            Aspect="AspectFit"
+            HeightRequest="150"
+            HorizontalOptions="Center"
+            Source="ttnm_logo.png"
+            VerticalOptions="Center" />
+
+        <Label
+            Grid.Row="1"
+            FontAttributes="Bold"
+            FontSize="20"
+            HorizontalOptions="Center"
+            Text="{Binding UserName}" />
+
+        <Grid
+            Grid.Row="2"
+            Margin="0,0,0,0"
+            Padding="15,0,15,0"
+            RowSpacing="20"
+            VerticalOptions="Center">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" ColumnSpacing="20">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" IsVisible="{Binding IsCollector}">
+                    <controls:ShadowContentBorder Padding="0,40,0,40" MaximumWidthRequest="200">
+
+                        <controls:ShadowContentBorder.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToCollectionPickUpPageCommand}" />
+                        </controls:ShadowContentBorder.GestureRecognizers>
+
+                        <VerticalStackLayout
+                            HorizontalOptions="Center"
+                            Spacing="10"
+                            VerticalOptions="Center">
+
+                            <Image HorizontalOptions="Center">
+                                <Image.Source>
+                                    <FontImageSource
+                                        FontFamily="FontAwesomeRegular"
+                                        Glyph="{x:Static fontawesome:FontAwesomeIcons.Recycle}"
+                                        Size="50"
+                                        Color="{StaticResource GreenTTNM}" />
+                                </Image.Source>
+                            </Image>
+                            <Label HorizontalTextAlignment="Center" TextColor="{StaticResource GreenTTNM}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span FontAttributes="Bold" Text="COLLECTION" />
+                                        <Span Text="&#x0a;" />
+                                        <Span FontAttributes="Bold" Text="PICKUP" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                        </VerticalStackLayout>
+                    </controls:ShadowContentBorder>
+                </Grid>
+
+                <Grid Grid.Column="0" IsVisible="{Binding IsAggregator}">
+                    <controls:ShadowContentBorder
+                        Grid.Column="0"
+                        Padding="0,40,0,40"
+                        MaximumWidthRequest="200">
+
+                        <controls:ShadowContentBorder.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToNewTransactionPageCommand}" />
+                        </controls:ShadowContentBorder.GestureRecognizers>
+
+                        <VerticalStackLayout
+                            HorizontalOptions="Center"
+                            Spacing="10"
+                            VerticalOptions="Center">
+
+                            <Image HorizontalOptions="Center">
+                                <Image.Source>
+                                    <FontImageSource
+                                        FontFamily="FontAwesomeRegular"
+                                        Glyph="{x:Static fontawesome:FontAwesomeIcons.CreditCard}"
+                                        Size="50"
+                                        Color="{StaticResource GreenTTNM}" />
+                                </Image.Source>
+                            </Image>
+                            <Label HorizontalTextAlignment="Center" TextColor="{StaticResource GreenTTNM}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span FontAttributes="Bold" Text="NEW" />
+                                        <Span Text="&#x0a;" />
+                                        <Span FontAttributes="Bold" Text="TRANSACTION" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                        </VerticalStackLayout>
+                    </controls:ShadowContentBorder>
+                </Grid>
+
+                <Grid Grid.Column="1" IsVisible="{Binding IsCollector}">
+                    <controls:ShadowContentBorder Padding="0,40,0,40" MaximumWidthRequest="200">
+
+                        <controls:ShadowContentBorder.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToPickUpSchedulePageCommand}" />
+                        </controls:ShadowContentBorder.GestureRecognizers>
+
+                        <VerticalStackLayout
+                            HorizontalOptions="Center"
+                            Spacing="10"
+                            VerticalOptions="Center">
+
+                            <Image HorizontalOptions="Center">
+                                <Image.Source>
+                                    <FontImageSource
+                                        FontFamily="FontAwesomeRegular"
+                                        Glyph="{x:Static fontawesome:FontAwesomeIcons.Clock}"
+                                        Size="50"
+                                        Color="{StaticResource PurpleTTNM}" />
+                                </Image.Source>
+                            </Image>
+                            <Label HorizontalTextAlignment="Center" TextColor="{StaticResource PurpleTTNM}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span FontAttributes="Bold" Text="PICKUP" />
+                                        <Span Text="&#x0a;" />
+                                        <Span FontAttributes="Bold" Text="SCHEDULE" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                        </VerticalStackLayout>
+                    </controls:ShadowContentBorder>
+                </Grid>
+
+                <Grid Grid.Column="1" IsVisible="{Binding IsAggregator}">
+                    <controls:ShadowContentBorder Padding="0,40,0,40" MaximumWidthRequest="200">
+
+                        <controls:ShadowContentBorder.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToRegisterCollectorPageCommand}" />
+                        </controls:ShadowContentBorder.GestureRecognizers>
+
+                        <VerticalStackLayout
+                            HorizontalOptions="Center"
+                            Spacing="10"
+                            VerticalOptions="Center">
+
+                            <Image HorizontalOptions="Center">
+                                <Image.Source>
+                                    <FontImageSource
+                                        FontFamily="FontAwesomeRegular"
+                                        Glyph="{x:Static fontawesome:FontAwesomeIcons.UserPlus}"
+                                        Size="50"
+                                        Color="{StaticResource PurpleTTNM}" />
+                                </Image.Source>
+                            </Image>
+                            <Label HorizontalTextAlignment="Center" TextColor="{StaticResource PurpleTTNM}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span FontAttributes="Bold" Text="REGISTER" />
+                                        <Span Text="&#x0a;" />
+                                        <Span FontAttributes="Bold" Text="COLLECTOR" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                        </VerticalStackLayout>
+                    </controls:ShadowContentBorder>
+
+                </Grid>
+
+            </Grid>
+
+            <Grid Grid.Row="1" ColumnSpacing="20">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <controls:ShadowContentBorder
+                    Grid.Column="0"
+                    Padding="0,40,0,40"
+                    MaximumWidthRequest="200">
+
+                    <controls:ShadowContentBorder.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToCollectionHistoryPageCommand}" />
+                    </controls:ShadowContentBorder.GestureRecognizers>
+
+                    <VerticalStackLayout
+                        HorizontalOptions="Center"
+                        Spacing="10"
+                        VerticalOptions="Center">
+
+                        <Image HorizontalOptions="Center">
+                            <Image.Source>
+                                <FontImageSource
+                                    FontFamily="FontAwesomeRegular"
+                                    Glyph="{x:Static fontawesome:FontAwesomeIcons.History}"
+                                    Size="50"
+                                    Color="{StaticResource YellowTTNM}" />
+                            </Image.Source>
+                        </Image>
+                        <Label HorizontalTextAlignment="Center" TextColor="{StaticResource YellowTTNM}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span FontAttributes="Bold" Text="COLLECTION" />
+                                    <Span Text="&#x0a;" />
+                                    <Span FontAttributes="Bold" Text="HISTORY" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                    </VerticalStackLayout>
+                </controls:ShadowContentBorder>
+
+                <controls:ShadowContentBorder
+                    Grid.Column="1"
+                    Padding="0,40,0,40"
+                    MaximumWidthRequest="200">
+
+                    <controls:ShadowContentBorder.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToSupportPageCommand}" />
+                    </controls:ShadowContentBorder.GestureRecognizers>
+
+                    <VerticalStackLayout
+                        HorizontalOptions="Center"
+                        Spacing="10"
+                        VerticalOptions="Center">
+
+                        <Image HorizontalOptions="Center">
+                            <Image.Source>
+                                <FontImageSource
+                                    FontFamily="FontAwesomeRegular"
+                                    Glyph="{x:Static fontawesome:FontAwesomeIcons.Envelope}"
+                                    Size="50"
+                                    Color="{StaticResource DarkGreenTTNM}" />
+                            </Image.Source>
+                        </Image>
+                        <Label HorizontalTextAlignment="Center" TextColor="{StaticResource DarkGreenTTNM}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span FontAttributes="Bold" Text="SUPPORT/" />
+                                    <Span Text="&#x0a;" />
+                                    <Span FontAttributes="Bold" Text="ENQUIRY" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                    </VerticalStackLayout>
+                </controls:ShadowContentBorder>
+
+            </Grid>
+
+            <controls:ShadowContentBorder
+                Grid.Row="2"
+                Margin="10,0,10,0"
+                Padding="0,20,0,20">
+
+                <controls:ShadowContentBorder.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenDialerCommand}" />
+                </controls:ShadowContentBorder.GestureRecognizers>
+
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="30">
+
+                    <Image HorizontalOptions="Center" Rotation="90">
+                        <Image.Source>
+                            <FontImageSource
+                                FontFamily="FontAwesomeRegular"
+                                Glyph="{x:Static fontawesome:FontAwesomeIcons.Phone}"
+                                Size="20"
+                                Color="{StaticResource GreenTTNM}" />
+                        </Image.Source>
+                    </Image>
+
+                    <Label TextColor="{StaticResource GreenTTNM}" VerticalOptions="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span FontAttributes="Bold" Text="HELPLINE:  " />
+                                <Span
+                                    FontAttributes="Bold"
+                                    Text="0115997586"
+                                    TextDecorations="Underline" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                </HorizontalStackLayout>
+
+            </controls:ShadowContentBorder>
+
+        </Grid>
+    </Grid>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ttnm.Views.Login.RegistrationPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:ttnm.CustomControls"
+    xmlns:fontawesome="clr-namespace:ttnm.Resources.Fonts"
+    Title="Register">
+
+    <ScrollView>
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Image
+                Grid.Row="0"
+                Margin="0,20,0,0"
+                Aspect="AspectFit"
+                HeightRequest="150"
+                HorizontalOptions="Center"
+                Source="ttnm_logo.png"
+                VerticalOptions="Center" />
+
+            <Grid
+                Grid.Row="1"
+                Margin="0,0,0,0"
+                Padding="15,0,15,0"
+                RowSpacing="20"
+                VerticalOptions="Center">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <VerticalStackLayout Grid.Row="0" Spacing="5">
+                    <Label Text="Name" />
+                    <Border Background="{AppThemeBinding Light={StaticResource ContentBackgroundLightTTNM}, Dark={StaticResource ContentBackgroundDarkTTNM}}">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="5" />
+                        </Border.StrokeShape>
+                        <controls:BorderlessEntry
+                            Keyboard="Text"
+                            Placeholder="e.g John Doe"
+                            Text="{Binding Name}" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Row="1" Spacing="5">
+                    <Label Text="Email" />
+                    <Border Background="{AppThemeBinding Light={StaticResource ContentBackgroundLightTTNM}, Dark={StaticResource ContentBackgroundDarkTTNM}}">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="5" />
+                        </Border.StrokeShape>
+                        <controls:BorderlessEntry
+                            Keyboard="Email"
+                            Placeholder="e.g john.doe@ttnm.org"
+                            Text="{Binding Email}" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Row="2" Spacing="5">
+                    <Label Text="Mobile Number" />
+                    <Border Background="{AppThemeBinding Light={StaticResource ContentBackgroundLightTTNM}, Dark={StaticResource ContentBackgroundDarkTTNM}}">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="5" />
+                        </Border.StrokeShape>
+                        <controls:BorderlessEntry
+                            Keyboard="Numeric"
+                            Placeholder="e.g 0712345678"
+                            Text="{Binding Mobile}" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Row="3" Spacing="5">
+                    <Label Text="Password" />
+                    <Border Background="{AppThemeBinding Light={StaticResource ContentBackgroundLightTTNM}, Dark={StaticResource ContentBackgroundDarkTTNM}}">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="5" />
+                        </Border.StrokeShape>
+                        <Grid>
+                            <controls:BorderlessEntry
+                                IsPassword="{Binding IsPassword}"
+                                Keyboard="Default"
+                                MinimumWidthRequest="200"
+                                Text="{Binding Password}" />
+                            <Image
+                                Margin="0,0,10,0"
+                                HorizontalOptions="End"
+                                IsVisible="{Binding IconVisible}"
+                                VerticalOptions="Center"
+                                WidthRequest="20">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TogglePasswordCommand}" />
+                                </Image.GestureRecognizers>
+                                <Image.Source>
+                                    <FontImageSource
+                                        FontFamily="FontAwesomeRegular"
+                                        Glyph="{x:Static fontawesome:FontAwesomeIcons.EyeSlash}"
+                                        Size="20"
+                                        Color="{StaticResource GreenTTNM}" />
+                                </Image.Source>
+                            </Image>
+                            <Image
+                                Margin="0,0,10,0"
+                                HorizontalOptions="End"
+                                VerticalOptions="Center"
+                                WidthRequest="20">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TogglePasswordCommand}" />
+                                </Image.GestureRecognizers>
+                                <Image.Source>
+                                    <FontImageSource
+                                        FontFamily="FontAwesomeRegular"
+                                        Glyph="{x:Static fontawesome:FontAwesomeIcons.Eye}"
+                                        Size="20"
+                                        Color="{StaticResource GreenTTNM}" />
+                                </Image.Source>
+                            </Image>
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+
+                <HorizontalStackLayout
+                    Grid.Row="4"
+                    RadioButtonGroup.GroupName="gender"
+                    Spacing="5">
+                    <Label Text="Gender (Optional)"/>
+                    <RadioButton
+                        Content="Male"
+                        IsChecked="{Binding IsMale}"
+                        Value="Male" />
+                    <RadioButton
+                        Content="Female"
+                        IsChecked="{Binding IsFemale}"
+                        Value="Female" />
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Grid.Row="5" Spacing="5">
+                    <Label Text="Register As" />
+                    <VerticalStackLayout RadioButtonGroup.GroupName="regType" Spacing="5">
+                        <RadioButton
+                            Content="Household"
+                            IsChecked="{Binding IsHousehold}"
+                            Value="Household" />
+                        <RadioButton
+                            Content="Collector"
+                            IsChecked="{Binding IsCollector}"
+                            Value="Collector" />
+                        <RadioButton
+                            Content="Aggregator"
+                            IsChecked="{Binding IsAggregator}"
+                            Value="Aggregator" />
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout
+                    Grid.Row="6"
+                    RadioButtonGroup.GroupName="gender"
+                    Spacing="5">
+                    <Label Margin="0,10,0,0" Text="Zone" />
+                    <Picker Title="Select Location" SelectedItem="{Binding Zone}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Kitengela</x:String>
+                                <x:String>Nonkopir</x:String>
+                                <x:String>EPZ</x:String>
+                                <x:String>New Valley</x:String>
+                                <x:String>Kyangombe</x:String>
+                                <x:String>Milimani</x:String>
+                                <x:String>Yukos</x:String>
+                                <x:String>Acacia</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </HorizontalStackLayout>
+
+                <Button
+                    Grid.Row="7"
+                    Margin="0,20,0,0"
+                    BackgroundColor="{StaticResource GreenTTNM}"
+                    Command="{Binding RegisterCommand}"
+                    CornerRadius="5"
+                    HorizontalOptions="Center"
+                    Text="REGISTER"
+                    TextColor="White"
+                    WidthRequest="200" />
+
+            </Grid>
+
+            <HorizontalStackLayout
+                Grid.Row="2"
+                Margin="0,40,0,40"
+                HorizontalOptions="Center"
+                Spacing="20"
+                VerticalOptions="Center">
+                <Label Text="Already registered? Sign In" TextColor="{StaticResource YellowTTNM}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SignInCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+
+        </Grid>
+
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ttnm.Views.NewTransaction.NewTransactionSuccessPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ttnm.ViewModels"
+    Title="Transaction Successful">
+    <ContentPage.BindingContext>
+        <local:NewTransactionSuccessViewModel />
+    </ContentPage.BindingContext>
+    <Grid RowSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout
+            Grid.Row="0"
+            Spacing="10"
+            VerticalOptions="CenterAndExpand">
+            <Label
+                FontSize="18"
+                HorizontalOptions="CenterAndExpand"
+                Text="Total Paid:" />
+            <Label
+                FontAttributes="Bold"
+                FontSize="25"
+                HorizontalOptions="CenterAndExpand"
+                Text="{Binding TotalPrice}"
+                TextColor="{StaticResource YellowTTNM}" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout
+            Grid.Row="1"
+            Spacing="10"
+            VerticalOptions="CenterAndExpand">
+            <Label
+                FontSize="18"
+                HorizontalOptions="CenterAndExpand"
+                Text="Paid To:" />
+            <Label
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalOptions="CenterAndExpand"
+                Text="{Binding CollectorName}"
+                TextColor="{StaticResource YellowTTNM}" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout
+            Grid.Row="2"
+            Spacing="10"
+            VerticalOptions="CenterAndExpand">
+            <Label
+                FontSize="18"
+                HorizontalOptions="CenterAndExpand"
+                Text="Payment Type:" />
+            <Label
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalOptions="CenterAndExpand"
+                Text="CASH"
+                TextColor="{StaticResource YellowTTNM}" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout
+            Grid.Row="3"
+            Spacing="10"
+            VerticalOptions="CenterAndExpand">
+            <Label
+                FontSize="18"
+                HorizontalOptions="CenterAndExpand"
+                Text="Payment Timestamp" />
+            <Label
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalOptions="CenterAndExpand"
+                Text="{Binding TimeStamp}"
+                TextColor="{StaticResource YellowTTNM}" />
+        </VerticalStackLayout>
+
+        <Button
+            Grid.Row="4"
+            Margin="0,0,0,0"
+            BackgroundColor="{StaticResource GreenTTNM}"
+            Command="{Binding GoToDashboardCommand}"
+            CornerRadius="5"
+            HorizontalOptions="Center"
+            Text="CLOSE"
+            TextColor="White"
+            VerticalOptions="Center"
+            WidthRequest="150" />
+    </Grid>
+</ContentPage>

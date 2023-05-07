@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ttnm.Views.CollectionPickup.AcceptedCollectionDetailsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:ttnm.CustomControls"
+    xmlns:fontawesome="clr-namespace:ttnm.Resources.Fonts"
+    Title="Accepted Collection Details">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,0" Spacing="10">
+
+            <ContentView
+                Margin="0,10,0,0"
+                Content="{Binding MapService.Map}"
+                HeightRequest="300"
+                HorizontalOptions="FillAndExpand" />
+
+            <controls:ContentBorder
+                Margin="0,20,0,0"
+                Padding="0,5"
+                BackgroundColor="Orange"
+                HorizontalOptions="Start"
+                WidthRequest="100">
+                <Label
+                    BackgroundColor="Transparent"
+                    FontAttributes="Bold"
+                    FontSize="Body"
+                    HorizontalOptions="Center"
+                    Text="{Binding SelectedCollection.Status}" />
+            </controls:ContentBorder>
+
+            <Line
+                HorizontalOptions="CenterAndExpand"
+                Stroke="LightGray"
+                StrokeThickness="1"
+                X2="400" />
+
+            <Label
+                FontAttributes="Bold"
+                FontSize="16"
+                Text="WHEN:" />
+
+            <Label FontSize="16" Text="{Binding SelectedCollection.Collected_date}" />
+
+            <Line
+                HorizontalOptions="CenterAndExpand"
+                Stroke="LightGray"
+                StrokeThickness="1"
+                X2="400" />
+
+            <Label
+                FontAttributes="Bold"
+                FontSize="16"
+                Text="CONTACT:" />
+
+            <Label FontSize="16" Text="{Binding SelectedCollection.Contact_person}" />
+
+            <controls:ContentBorder
+                Margin="10,0,10,0"
+                Padding="0,10,0,10"
+                BackgroundColor="Transparent">
+
+                <controls:ContentBorder.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenDialerCommand}" />
+                </controls:ContentBorder.GestureRecognizers>
+
+                <HorizontalStackLayout HorizontalOptions="Start" Spacing="10">
+
+                    <Image HorizontalOptions="Center" Rotation="90">
+                        <Image.Source>
+                            <FontImageSource
+                                FontFamily="FontAwesomeSolid"
+                                Glyph="{x:Static fontawesome:FontAwesomeIcons.Phone}"
+                                Size="20"
+                                Color="{StaticResource GreenTTNM}" />
+                        </Image.Source>
+                    </Image>
+
+                    <Label TextColor="{StaticResource GreenTTNM}" VerticalOptions="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    FontAttributes="Bold"
+                                    FontSize="Subtitle"
+                                    Text="{Binding SelectedCollection.Contact_phone}"
+                                    TextDecorations="Underline" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                </HorizontalStackLayout>
+
+            </controls:ContentBorder>
+
+            <Line
+                HorizontalOptions="CenterAndExpand"
+                Stroke="LightGray"
+                StrokeThickness="1"
+                X2="400" />
+
+            <Label
+                FontAttributes="Bold"
+                FontSize="16"
+                Text="WASTE TYPE:" />
+
+            <Label FontSize="16" Text="{Binding SelectedCollection.Waste_type}" />
+
+            <Line
+                HorizontalOptions="CenterAndExpand"
+                Stroke="LightGray"
+                StrokeThickness="1"
+                X2="400" />
+
+            <Label
+                FontAttributes="Bold"
+                FontSize="16"
+                Text="ADDITIONAL COMMENTS:" />
+
+            <Label FontSize="16" Text="{Binding SelectedCollection.Extra_comments}" />
+
+            <Button
+                Margin="0,20,0,20"
+                BackgroundColor="Red"
+                Command="{Binding CancelCollectionCommand}"
+                Text="CANCEL"
+                TextColor="White" />
+
+            <Button
+                Margin="0,0,0,20"
+                BackgroundColor="{StaticResource GreenTTNM}"
+                Command="{Binding CollectCommand}"
+                Text="COLLECT"
+                TextColor="White" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

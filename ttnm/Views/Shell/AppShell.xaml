@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ttnm.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dashboard="clr-namespace:ttnm.Views.Dashboard"
+    xmlns:faqs="clr-namespace:ttnm.Views.FAQs"
+    xmlns:fontawesome="clr-namespace:ttnm.Resources.Fonts"
+    xmlns:settings="clr-namespace:ttnm.Views.Settings"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Shell.NavBarHasShadow="True">
+
+    <!--<Page.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource Tertiary}" StatusBarStyle="LightContent" />
+    </Page.Behaviors>-->
+
+    <TabBar>
+
+        <ShellContent Title="Dashboard" ContentTemplate="{DataTemplate dashboard:DashboardPage}">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="FontAwesomeRegular"
+                    Glyph="{x:Static fontawesome:FontAwesomeIcons.ChartBar}"
+                    Size="20" />
+            </ShellContent.Icon>
+        </ShellContent>
+
+        <ShellContent Title="Settings" ContentTemplate="{DataTemplate settings:SettingsPage}">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="FontAwesomeRegular"
+                    Glyph="{x:Static fontawesome:FontAwesomeIcons.Cogs}"
+                    Size="20" />
+            </ShellContent.Icon>
+        </ShellContent>
+
+        <ShellContent Title="FAQs" ContentTemplate="{DataTemplate faqs:FAQsPage}">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="FontAwesomeRegular"
+                    Glyph="{x:Static fontawesome:FontAwesomeIcons.QuestionCircle}"
+                    Size="20" />
+            </ShellContent.Icon>
+        </ShellContent>
+
+    </TabBar>
+
+</Shell>

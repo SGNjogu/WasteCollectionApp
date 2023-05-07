@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ttnm.Views.CollectorHistory.CollectionDeliveryPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:ttnm.CustomControls"
+    Title="Collection Delivery">
+    <Grid Padding="20,0">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout
+            Grid.Row="0"
+            Margin="0,20,0,0"
+            Spacing="10">
+            <Label
+                HorizontalOptions="Start"
+                Text="SELECT AGGREGATOR"
+                VerticalOptions="Center" />
+
+            <Picker
+                Title="Select Aggregator"
+                ItemDisplayBinding="{Binding Name}"
+                ItemsSource="{Binding AggregatorsList}"
+                MinimumWidthRequest="100"
+                SelectedItem="{Binding SelectedAggregator}" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="1" Spacing="10">
+            <Label Text="WASTE TYPE" VerticalOptions="Center" />
+
+            <Border
+                BackgroundColor="{AppThemeBinding Light={StaticResource ContentBackgroundLightTTNM},
+                                                  Dark={StaticResource ContentBackgroundDarkTTNM}}"
+                MinimumWidthRequest="100"
+                VerticalOptions="Center">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="5" />
+                </Border.StrokeShape>
+                <Picker
+                    Title="Select Waste Type"
+                    MinimumWidthRequest="100"
+                    SelectedItem="{Binding WasteType}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Paper</x:String>
+                            <x:String>Plastic</x:String>
+                            <x:String>Metal</x:String>
+                            <x:String>Glass</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </Border>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="2" Spacing="10">
+            <Label Text="PRICE PER KG" />
+
+            <Border BackgroundColor="{AppThemeBinding Light={StaticResource ContentBackgroundLightTTNM}, Dark={StaticResource ContentBackgroundDarkTTNM}}" MinimumWidthRequest="100">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="5" />
+                </Border.StrokeShape>
+                <controls:BorderlessEntry
+                    Keyboard="Numeric"
+                    Placeholder="Kg"
+                    Text="{Binding PricePerKg}" />
+            </Border>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="3" Spacing="10">
+            <Label Text="WHAT'S THE WEIGHT OF THIS DELIVERY?" />
+
+            <Border BackgroundColor="{AppThemeBinding Light={StaticResource ContentBackgroundLightTTNM}, Dark={StaticResource ContentBackgroundDarkTTNM}}" MinimumWidthRequest="100">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="5" />
+                </Border.StrokeShape>
+                <controls:BorderlessEntry
+                    Keyboard="Numeric"
+                    Placeholder="Kg"
+                    Text="{Binding Weight}" />
+            </Border>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="4" Spacing="10">
+            <Label Text="ORDER AMOUNT (KSH)" />
+
+            <Border BackgroundColor="{AppThemeBinding Light={StaticResource ContentBackgroundLightTTNM}, Dark={StaticResource ContentBackgroundDarkTTNM}}" MinimumWidthRequest="100">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="5" />
+                </Border.StrokeShape>
+                <controls:BorderlessEntry
+                    Keyboard="Numeric"
+                    Placeholder="Kg"
+                    Text="{Binding Amount}" />
+            </Border>
+        </VerticalStackLayout>
+
+        <Button
+            Grid.Row="5"
+            Margin="0,0,0,0"
+            BackgroundColor="{StaticResource GreenTTNM}"
+            Command="{Binding SubmitDeliveryCommand}"
+            CornerRadius="5"
+            HorizontalOptions="Center"
+            Text="SUBMIT DELIVERY"
+            TextColor="White"
+            VerticalOptions="Start"
+            WidthRequest="150" />
+
+    </Grid>
+</ContentPage>

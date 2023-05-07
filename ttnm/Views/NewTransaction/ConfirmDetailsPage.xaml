@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ttnm.Views.NewTransaction.ConfirmDetailsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ttnm.ViewModels"
+    Title="Confirm Details">
+
+    <Grid RowSpacing="20" VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,20,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <VerticalStackLayout Grid.Column="0" HorizontalOptions="CenterAndExpand">
+                <Label
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    Text="Total Due:" />
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    Text="{Binding TotalPrice}"
+                    TextColor="{StaticResource YellowTTNM}" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="1" HorizontalOptions="CenterAndExpand">
+                <Label
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    Text="Agent:" />
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    Text="{Binding CollectorName}"
+                    TextColor="{StaticResource YellowTTNM}" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <ListView
+            Grid.Row="1"
+            CachingStrategy="RecycleElement"
+            HasUnevenRows="True"
+            HorizontalOptions="FillAndExpand"
+            IsPullToRefreshEnabled="False"
+            ItemsSource="{Binding WasteCollections, Mode=TwoWay}"
+            SelectionMode="None"
+            SeparatorColor="Gray"
+            SeparatorVisibility="Default">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Margin="0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label HorizontalOptions="CenterAndExpand" Text="Waste" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="16"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="{Binding WasteType}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1">
+                                <Label HorizontalOptions="CenterAndExpand" Text="Weight" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="16"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="{Binding Weight}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="2">
+                                <Label HorizontalOptions="CenterAndExpand" Text="Price per Kg (Ksh)" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="16"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="{Binding PricePerKg}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button
+                Grid.Column="0"
+                Margin="0,0,0,0"
+                BackgroundColor="{StaticResource GreenTTNM}"
+                Command="{Binding GoBackCommand}"
+                CornerRadius="5"
+                HorizontalOptions="Center"
+                Text="BACK"
+                TextColor="White"
+                WidthRequest="150" />
+
+            <Button
+                Grid.Column="1"
+                Margin="0,0,0,0"
+                BackgroundColor="{StaticResource GreenTTNM}"
+                Command="{Binding EnterPaymentDetailsCommand}"
+                CornerRadius="5"
+                HorizontalOptions="Center"
+                Text="CONFIRM"
+                TextColor="White"
+                WidthRequest="150" />
+        </Grid>
+    </Grid>
+</ContentPage>

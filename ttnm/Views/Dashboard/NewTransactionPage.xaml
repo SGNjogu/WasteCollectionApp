@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ttnm.Views.Dashboard.NewTransactionPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:ttnm.CustomControls"
+    xmlns:fontawesome="clr-namespace:ttnm.Resources.Fonts"
+    Title="New Transaction">
+    
+    <Grid RowSpacing="20" VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Label
+            Grid.Row="0"
+            Margin="0,20,0,0"
+            HorizontalOptions="Center"
+            Text="Pick Agent" />
+
+        <Border
+            Grid.Row="1"
+            Padding="10,0"
+            BackgroundColor="{AppThemeBinding Light={StaticResource ContentBackgroundLightTTNM},
+                                              Dark={StaticResource ContentBackgroundDarkTTNM}}"
+            HorizontalOptions="CenterAndExpand">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="5" />
+            </Border.StrokeShape>
+            <SearchBar
+                Keyboard="Default"
+                Placeholder="Enter Name or Phone Number"
+                SearchCommand="{Binding SearchCommand}"
+                Text="{Binding SearchText, Mode=TwoWay}"
+                TextChanged="SearchBar_TextChanged" />
+        </Border>
+
+        <ListView
+            Grid.Row="2"
+            HasUnevenRows="True"
+            HorizontalOptions="FillAndExpand"
+            IsPullToRefreshEnabled="False"
+            IsVisible="{Binding IsVisibleSearchResults}"
+            ItemsSource="{Binding CollectorsSearchResults}"
+            MaximumHeightRequest="200"
+            SelectedItem="{Binding TappedCollector, Mode=TwoWay}"
+            SelectionMode="Single"
+            SeparatorColor="Gray"
+            SeparatorVisibility="Default">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label
+                            Margin="0,8"
+                            HorizontalOptions="Center"
+                            Text="{Binding NameTelephone}" />
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!--hack to get the visibility of collector list view to work properly when you first 
+        load the page and search-->
+        <Label
+            Grid.Row="3"
+            HorizontalOptions="Center"
+              IsVisible="{Binding IsVisibleSearchResults}"/>
+        
+        <Label
+            Grid.Row="3"
+            HorizontalOptions="Center"
+            Text="Enter details:" />
+
+        <Grid
+            Grid.Row="4"
+            ColumnSpacing="20"
+            HorizontalOptions="CenterAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <VerticalStackLayout Grid.Column="0" HorizontalOptions="CenterAndExpand">
+                <Label HorizontalOptions="CenterAndExpand" Text="Waste" />
+                <Border
+                    BackgroundColor="{AppThemeBinding Light={StaticResource ContentBackgroundLightTTNM},
+                                                      Dark={StaticResource ContentBackgroundDarkTTNM}}"
+                    HorizontalOptions="CenterAndExpand"
+                    MinimumWidthRequest="100">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="5" />
+                    </Border.StrokeShape>
+                    <Picker
+                        Title="Select Waste Type"
+                        MinimumWidthRequest="100"
+                        SelectedItem="{Binding WasteType}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Paper</x:String>
+                                <x:String>Plastic</x:String>
+                                <x:String>Metal</x:String>
+                                <x:String>Glass</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </Border>
+
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="1" HorizontalOptions="CenterAndExpand">
+                <Label HorizontalOptions="CenterAndExpand" Text="Weight (Kg)" />
+                <Border
+                    BackgroundColor="{AppThemeBinding Light={StaticResource ContentBackgroundLightTTNM},
+                                                      Dark={StaticResource ContentBackgroundDarkTTNM}}"
+                    HorizontalOptions="CenterAndExpand"
+                    MinimumWidthRequest="100">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="5" />
+                    </Border.StrokeShape>
+                    <controls:BorderlessEntry
+                        Keyboard="Numeric"
+                        Placeholder="Kg"
+                        Text="{Binding Weight}" />
+                </Border>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="2" HorizontalOptions="CenterAndExpand">
+                <Label HorizontalOptions="CenterAndExpand" Text="Price per Kg (Ksh)" />
+                <Border
+                    BackgroundColor="{AppThemeBinding Light={StaticResource ContentBackgroundLightTTNM},
+                                                      Dark={StaticResource ContentBackgroundDarkTTNM}}"
+                    HorizontalOptions="CenterAndExpand"
+                    MinimumWidthRequest="100">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="5" />
+                    </Border.StrokeShape>
+                    <controls:BorderlessEntry
+                        Keyboard="Numeric"
+                        Placeholder="Ksh"
+                        Text="{Binding PricePerKg}" />
+                </Border>
+            </VerticalStackLayout>
+        </Grid>
+
+        <VerticalStackLayout Grid.Row="5" HorizontalOptions="CenterAndExpand">
+            <ImageButton Command="{Binding AddWasteEntryCommand}" HorizontalOptions="Center">
+                <ImageButton.Source>
+                    <FontImageSource
+                        FontFamily="FontAwesomeRegular"
+                        Glyph="{x:Static fontawesome:FontAwesomeIcons.PlusCircle}"
+                        Size="30"
+                        Color="{StaticResource GreenTTNM}" />
+                </ImageButton.Source>
+            </ImageButton>
+            <Label HorizontalOptions="CenterAndExpand" Text="ADD" />
+        </VerticalStackLayout>
+
+
+        <ListView
+            Grid.Row="6"
+            CachingStrategy="RecycleElement"
+            HasUnevenRows="True"
+            HorizontalOptions="FillAndExpand"
+            IsPullToRefreshEnabled="False"
+            ItemsSource="{Binding WasteCollections, Mode=TwoWay}"
+            SelectionMode="None"
+            SeparatorColor="Gray"
+            SeparatorVisibility="Default">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Margin="0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label HorizontalOptions="CenterAndExpand" Text="Waste" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="16"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="{Binding WasteType}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1">
+                                <Label HorizontalOptions="CenterAndExpand" Text="Weight" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="16"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="{Binding Weight}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="2">
+                                <Label HorizontalOptions="CenterAndExpand" Text="Price per Kg (Ksh)" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="16"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="{Binding PricePerKg}" />
+                            </VerticalStackLayout>
+                            <ImageButton
+                                Grid.Column="3"
+                                Margin="0,0,10,0"
+                                Clicked="ImageButton_Clicked"
+                                HorizontalOptions="Center">
+                                <ImageButton.Source>
+                                    <FontImageSource
+                                        FontFamily="FontAwesomeRegular"
+                                        Glyph="{x:Static fontawesome:FontAwesomeIcons.TimesCircle}"
+                                        Size="20"
+                                        Color="Red" />
+                                </ImageButton.Source>
+                            </ImageButton>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Grid Grid.Row="7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button
+                Grid.Column="0"
+                Margin="0,0,0,0"
+                BackgroundColor="{StaticResource GreenTTNM}"
+                Command="{Binding GoToDashboardCommand}"
+                CornerRadius="5"
+                HorizontalOptions="Center"
+                Text="BACK"
+                TextColor="White"
+                WidthRequest="150" />
+
+            <Button
+                Grid.Column="1"
+                Margin="0,0,0,0"
+                BackgroundColor="{StaticResource GreenTTNM}"
+                Command="{Binding ConfirmDetailsCommand}"
+                CornerRadius="5"
+                HorizontalOptions="Center"
+                Text="CONFIRM"
+                TextColor="White"
+                WidthRequest="150" />
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ttnm.Views.Dashboard.CollectionHistoryPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fontawesome="clr-namespace:ttnm.Resources.Fonts"
+    Title="Collection History">
+    <Grid>
+        <ListView
+            CachingStrategy="RecycleElement"
+            HasUnevenRows="True"
+            IsPullToRefreshEnabled="True"
+            IsRefreshing="{Binding IsBusy}"
+            IsVisible="{Binding IsCollector}"
+            ItemTapped="ListView_ItemTapped"
+            ItemsSource="{Binding CollectedCollectionRequests}"
+            RefreshCommand="{Binding RefreshCommand}"
+            SelectionMode="None"
+            SeparatorColor="Gray"
+            SeparatorVisibility="Default">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid
+                            Margin="30,0"
+                            ColumnSpacing="20"
+                            HeightRequest="80">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Margin="0,0">
+                                <Image.Source>
+                                    <FontImageSource
+                                        FontFamily="FontAwesomeSolid"
+                                        Glyph="{x:Static fontawesome:FontAwesomeIcons.UserCircle}"
+                                        Size="40"
+                                        Color="{StaticResource GreenTTNM}" />
+                                </Image.Source>
+                            </Image>
+                            <VerticalStackLayout
+                                Grid.Column="1"
+                                Spacing="5"
+                                VerticalOptions="Center">
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="Subtitle"
+                                    Text="{Binding Contact_person}" />
+                                <Label Text="{Binding Collected_date}" />
+                            </VerticalStackLayout>
+                        </Grid>
+
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ListView
+            CachingStrategy="RecycleElement"
+            HasUnevenRows="True"
+            IsPullToRefreshEnabled="True"
+            IsRefreshing="{Binding IsBusy}"
+            IsVisible="{Binding IsAggregator}"
+            ItemsSource="{Binding AggregatorCollectionHistory}"
+            RefreshCommand="{Binding RefreshCommand}"
+            SelectionMode="None"
+            SeparatorColor="Gray"
+            SeparatorVisibility="Default"
+            VerticalScrollBarVisibility="Always">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell IsEnabled="False">
+                        <Grid
+                            Margin="30,10"
+                            ColumnSpacing="20"
+                            HeightRequest="80">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Margin="0,0">
+                                <Image.Source>
+                                    <FontImageSource
+                                        FontFamily="FontAwesomeSolid"
+                                        Glyph="{x:Static fontawesome:FontAwesomeIcons.UserCircle}"
+                                        Size="40"
+                                        Color="{StaticResource GreenTTNM}" />
+                                </Image.Source>
+                            </Image>
+                            <VerticalStackLayout
+                                Grid.Column="1"
+                                Spacing="5"
+                                VerticalOptions="Center">
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="Subtitle"
+                                    Text="{Binding Collector_name}"
+                                    TextColor="{StaticResource Gray500}" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    Text="{Binding Created_date}"
+                                    TextColor="{StaticResource YellowTTNM}" />
+                                <HorizontalStackLayout Spacing="20">
+                                    <Label Text="{Binding Waste_type}" />
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Weight}" />
+                                                <Span Text=" Kg" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                            <Label
+                                Grid.Column="2"
+                                FontSize="18"
+                                HorizontalOptions="End"
+                                VerticalOptions="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span
+                                            FontAttributes="Bold"
+                                            Text="KSH "
+                                            TextColor="{StaticResource YellowTTNM}" />
+                                        <Span
+                                            FontAttributes="Bold"
+                                            Text="{Binding Order_amount}"
+                                            TextColor="{StaticResource YellowTTNM}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</ContentPage>

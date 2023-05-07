@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ttnm.Views.Login.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:ttnm.CustomControls"
+    xmlns:fontawesome="clr-namespace:ttnm.Resources.Fonts"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Title="Login"
+    NavigationPage.HasNavigationBar="False">
+
+    <!--<Page.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource Tertiary}" StatusBarStyle="LightContent" />
+    </Page.Behaviors>-->
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Image
+            Grid.Row="0"
+            Margin="0,20,0,0"
+            Aspect="AspectFit"
+            HeightRequest="150"
+            HorizontalOptions="Center"
+            Source="ttnm_logo.png"
+            VerticalOptions="Center" />
+
+        <Grid
+            Grid.Row="1"
+            Margin="0,-40,0,0"
+            Padding="15,0,15,0"
+            RowSpacing="20"
+            VerticalOptions="Center">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <VerticalStackLayout Grid.Row="0" Spacing="5">
+                <Label Text="Email" />
+                <Border BackgroundColor="{AppThemeBinding Light={StaticResource ContentBackgroundLightTTNM}, Dark={StaticResource ContentBackgroundDarkTTNM}}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="5" />
+                    </Border.StrokeShape>
+                    <controls:BorderlessEntry
+                        Keyboard="Email"
+                        Placeholder="e.g john.doe@ttnm.org"
+                        Text="{Binding Email}" />
+                </Border>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Row="1" Spacing="5">
+                <Label Text="Password" />
+                <Border BackgroundColor="{AppThemeBinding Light={StaticResource ContentBackgroundLightTTNM}, Dark={StaticResource ContentBackgroundDarkTTNM}}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="5" />
+                    </Border.StrokeShape>
+                    <Grid>
+                        <controls:BorderlessEntry
+                            IsPassword="{Binding IsPassword}"
+                            Keyboard="Default"
+                            MinimumWidthRequest="200"
+                            Text="{Binding Password}" />
+                        <Image
+                            Margin="0,0,10,0"
+                            HorizontalOptions="End"
+                            IsVisible="{Binding IconVisible}"
+                            VerticalOptions="Center"
+                            WidthRequest="20">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding TogglePasswordCommand}" />
+                            </Image.GestureRecognizers>
+                            <Image.Source>
+                                <FontImageSource
+                                    FontFamily="FontAwesomeRegular"
+                                    Glyph="{x:Static fontawesome:FontAwesomeIcons.EyeSlash}"
+                                    Size="20"
+                                    Color="{StaticResource GreenTTNM}" />
+                            </Image.Source>
+                        </Image>
+                        <Image
+                            Margin="0,0,10,0"
+                            HorizontalOptions="End"
+                            VerticalOptions="Center"
+                            WidthRequest="20">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding TogglePasswordCommand}" />
+                            </Image.GestureRecognizers>
+                            <Image.Source>
+                                <FontImageSource
+                                    FontFamily="FontAwesomeRegular"
+                                    Glyph="{x:Static fontawesome:FontAwesomeIcons.Eye}"
+                                    Size="20"
+                                    Color="{StaticResource GreenTTNM}" />
+                            </Image.Source>
+                        </Image>
+                    </Grid>
+                </Border>
+            </VerticalStackLayout>
+            
+            <HorizontalStackLayout Grid.Row="2">
+                <CheckBox IsChecked="{Binding SaveCredentials}"/>
+                <Label HorizontalOptions="Start" Text="Remember me" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+
+            <Button
+                Grid.Row="3"
+                Margin="0,20,0,0"
+                BackgroundColor="{StaticResource GreenTTNM}"
+                Command="{Binding LoginCommand}"
+                CornerRadius="5"
+                HorizontalOptions="Center"
+                Text="SIGN IN"
+                TextColor="White"
+                WidthRequest="200" />
+
+            <VerticalStackLayout
+                Grid.Row="4"
+                HorizontalOptions="Center"
+                Spacing="10"
+                WidthRequest="200">
+                <Label HorizontalOptions="Center" Text="Forgot password?">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Button
+                    BackgroundColor="{StaticResource PurpleTTNM}"
+                    Command="{Binding SignUpCommand}"
+                    CornerRadius="5"
+                    Text="SIGN UP"
+                    TextColor="White" />
+            </VerticalStackLayout>
+
+        </Grid>
+
+        <!--<HorizontalStackLayout
+            Grid.Row="2"
+            Margin="0,0,0,20"
+            HorizontalOptions="Center"
+            Spacing="20"
+            VerticalOptions="Center">
+            <Label Text="How it Works" TextColor="{StaticResource YellowTTNM}" />
+            <Label Text="FAQs" TextColor="{StaticResource PurpleTTNM}" />
+        </HorizontalStackLayout>-->
+
+    </Grid>
+
+</ContentPage>

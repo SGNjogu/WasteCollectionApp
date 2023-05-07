@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ttnm.Views.Dashboard.SupportPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:ttnm.ViewModels"
+    Title="Support/Enquiry"
+    x:DataType="viewmodel:SupportViewModel"
+    Shell.TabBarIsVisible="False">
+    <Grid Margin="15,0,15,0">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+
+        </Grid.RowDefinitions>
+
+
+        <VerticalStackLayout
+            Grid.Row="0"
+            Spacing="10"
+            VerticalOptions="Center">
+            <Label FontSize="Default" Text="Subject" />
+
+            <Entry
+                BackgroundColor="{StaticResource Gray100}"
+                HeightRequest="50"
+                Placeholder="How could we assist you"
+                Text="{Binding Subject}"
+                TextColor="{StaticResource Black}" />
+        </VerticalStackLayout>
+
+
+        <VerticalStackLayout Grid.Row="1" Spacing="10">
+            <Label
+                Grid.Row="2"
+                FontSize="Default"
+                Text="Message/Enquiry"
+                VerticalOptions="Start" />
+
+            <Editor
+                Grid.Row="3"
+                BackgroundColor="{StaticResource Gray100}"
+                HeightRequest="150"
+                Placeholder="Please provide more detail"
+                Text="{Binding Message}"
+                TextColor="{StaticResource Black}"
+                VerticalOptions="Start" />
+        </VerticalStackLayout>
+
+        <Button
+            Grid.Row="2"
+            Margin="0,20,0,10"
+            BackgroundColor="{StaticResource GreenTTNM}"
+            Command="{Binding SubmitQueryCommand}"
+            CornerRadius="5"
+            HeightRequest="50"
+            HorizontalOptions="Center"
+            Text="SUBMIT"
+            TextColor="White"
+            VerticalOptions="Start"
+            WidthRequest="200" />
+    </Grid>
+</ContentPage>

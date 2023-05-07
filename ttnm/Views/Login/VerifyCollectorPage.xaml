@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ttnm.Views.Login.VerifyCollectorPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:ttnm.CustomControls"
+    Title="Verify Collector">
+    <Grid RowSpacing="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Image
+            Grid.Row="0"
+            Margin="0,20,0,0"
+            Aspect="AspectFit"
+            HeightRequest="200"
+            HorizontalOptions="Center"
+            Source="ttnm_logo.png"
+            VerticalOptions="Center" />
+
+        <Label
+            Grid.Row="1"
+            FontSize="Large"
+            HorizontalOptions="Center"
+            Text="Enter verification code sent to:" />
+        <Label
+            Grid.Row="2"
+            FontAttributes="Bold"
+            FontSize="Title"
+            HorizontalOptions="Center"
+            Text="{Binding PhoneNumber}" />
+        <Border
+            Grid.Row="3"
+            Margin="10,0"
+            Background="{AppThemeBinding Light={StaticResource ContentBackgroundLightTTNM},
+                                         Dark={StaticResource ContentBackgroundDarkTTNM}}">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="5" />
+            </Border.StrokeShape>
+            <controls:BorderlessEntry
+                FontSize="Large"
+                Keyboard="Numeric"
+                Placeholder="e.g 123456"
+                Text="{Binding VerificationCode}" />
+        </Border>
+
+        <Button
+            Grid.Row="4"
+            Margin="0,40,0,0"
+            BackgroundColor="{StaticResource GreenTTNM}"
+            Command="{Binding VerifyCommand}"
+            CornerRadius="5"
+            FontAttributes="Bold"
+            FontSize="Large"
+            HorizontalOptions="Center"
+            Text="VERIFY"
+            TextColor="White"
+            WidthRequest="200" />
+
+        <HorizontalStackLayout
+            Grid.Row="5"
+            Margin="0,0,0,40"
+            HorizontalOptions="Center"
+            Spacing="20"
+            VerticalOptions="EndAndExpand">
+            <Label
+                FontSize="Large"
+                Text="Did not receive Code? Resend."
+                TextColor="{StaticResource YellowTTNM}"
+                VerticalOptions="End">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ResendVerificationCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>

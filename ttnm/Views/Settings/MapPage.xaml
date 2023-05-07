@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ttnm.Views.Settings.MapPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:ttnm.ViewModels"
+    Title="MapPage"
+    x:DataType="viewmodel:MapViewModel">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <ContentView Grid.RowSpan="2" Content="{Binding MapService.Map}" />
+
+        <Button
+            Grid.Row="1"
+            Margin="0,20,0,10"
+            BackgroundColor="{StaticResource GreenTTNM}"
+            Command="{Binding SaveCurrentLocationCommand}"
+            CornerRadius="5"
+            HeightRequest="50"
+            HorizontalOptions="Center"
+            Text="SAVE ADDRESS"
+            TextColor="White"
+            VerticalOptions="End"
+            WidthRequest="200" />
+
+    </Grid>
+</ContentPage>
+    
